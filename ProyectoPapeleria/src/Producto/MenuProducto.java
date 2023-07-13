@@ -23,7 +23,7 @@ public class MenuProducto extends javax.swing.JFrame {
         this.listaProducto= this.database.listaProducto();
         initComponents();
         initAlternComponent();
-        setLocationRelativeTo(null);
+        
         
     }
     
@@ -31,6 +31,7 @@ public class MenuProducto extends javax.swing.JFrame {
         setTitle("Producto");
         setIconImage( getToolkit().createImage( ClassLoader.getSystemResource("Icons/papeleria.png") ) );
         this.modelo=(DefaultTableModel) this.tabla_productos.getModel();
+        setLocationRelativeTo(null);
         mostrarProductos();
     }
 
@@ -151,6 +152,7 @@ public class MenuProducto extends javax.swing.JFrame {
         );
 
         tabla_productos.setBackground(new java.awt.Color(255, 255, 255));
+        tabla_productos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tabla_productos.setForeground(new java.awt.Color(255, 255, 255));
         tabla_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -249,8 +251,10 @@ public class MenuProducto extends javax.swing.JFrame {
         this.modelo.setRowCount(0);
         for(int i = 0; i < this.listaProducto.length; i++){
             if(this.listaProducto[i]!=null){
+                String entero = String.valueOf(i+1);
                 Object temporal [] = {this.listaProducto[i].getId(), this.listaProducto[i].getNombre(), this.listaProducto[i].getCantidad(), this.listaProducto[i].getValorU(), this.listaProducto[i].getPrecio()};
                 this.modelo.addRow(temporal);
+                revalidate();
             }
         }
     }

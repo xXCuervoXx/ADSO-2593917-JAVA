@@ -147,9 +147,11 @@ public class EliminarProducto extends javax.swing.JFrame {
             if(this.listaProducto[i]!=null){
                 if(eliminar[i].isSelected()){
                     int aux = i;
-                    boolean temp = this.ventanaMenu.database.eliminarProducto(aux);
+                    boolean temp = this.ventanaMenu.database.eliminarProducto(aux+1);
                     JOptionPane.showMessageDialog(this, "ERROR, todos los campos son obligatorios");
                     
+                }else{
+                    JOptionPane.showMessageDialog(this, "Ningun campo fue seleccionado");
                 }
                 
             }

@@ -1,6 +1,8 @@
 
 package proyectopapeleria;
 
+import Clientes.MenuCliente;
+import Compra.RegistroCompra;
 import Producto.MenuProducto;
 
 
@@ -47,6 +49,11 @@ public class Menu extends javax.swing.JFrame {
         btn_RegistroCliente.setText("Cliente");
         btn_RegistroCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_RegistroCliente.setFocusable(false);
+        btn_RegistroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RegistroClienteActionPerformed(evt);
+            }
+        });
 
         iconRegistroCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/descarga.png"))); // NOI18N
 
@@ -70,6 +77,11 @@ public class Menu extends javax.swing.JFrame {
         btn_RegistroCompra.setText("Compra");
         btn_RegistroCompra.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_RegistroCompra.setFocusable(false);
+        btn_RegistroCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RegistroCompraActionPerformed(evt);
+            }
+        });
 
         icon_ventaDelDia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/verificar (1).png"))); // NOI18N
 
@@ -172,6 +184,18 @@ public class Menu extends javax.swing.JFrame {
         MenuProducto ventana = new MenuProducto(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_RegistroProductoActionPerformed
+
+    private void btn_RegistroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegistroClienteActionPerformed
+        setVisible(false);
+        MenuCliente ventana = new MenuCliente(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_btn_RegistroClienteActionPerformed
+
+    private void btn_RegistroCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegistroCompraActionPerformed
+        setVisible(false);
+        RegistroCompra ventana = new RegistroCompra(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_btn_RegistroCompraActionPerformed
     
     public void initAlternComponents(){
         setTitle("Menu");
