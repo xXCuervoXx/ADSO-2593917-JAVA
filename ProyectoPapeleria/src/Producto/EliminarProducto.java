@@ -40,7 +40,7 @@ public class EliminarProducto extends javax.swing.JFrame {
 
         contentPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
-        etq_title.setFont(new java.awt.Font("SimSun-ExtB", 0, 36)); // NOI18N
+        etq_title.setFont(new java.awt.Font("SimSun-ExtB", 1, 36)); // NOI18N
         etq_title.setForeground(new java.awt.Color(0, 0, 0));
         etq_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etq_title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/basura (2).png"))); // NOI18N
@@ -146,8 +146,8 @@ public class EliminarProducto extends javax.swing.JFrame {
         for(int i = 0; i < this.listaProducto.length; i++){
             if(this.listaProducto[i]!=null){
                 if(eliminar[i].isSelected()){
-                    int aux = i;
-                    boolean temp = this.ventanaMenu.database.eliminarProducto(aux+1);
+                    int id = listaProducto[i].getId();
+                    boolean temp = this.ventanaMenu.database.eliminarProducto(id);
                     JOptionPane.showMessageDialog(this, "ERROR, todos los campos son obligatorios");
                     
                 }else{
@@ -156,6 +156,7 @@ public class EliminarProducto extends javax.swing.JFrame {
                 
             }
         }
+        mostrarDatosProducto();
     }//GEN-LAST:event_btn_eliminarActionPerformed
     
     

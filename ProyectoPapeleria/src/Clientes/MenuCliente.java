@@ -107,6 +107,11 @@ public class MenuCliente extends javax.swing.JFrame {
         btn_EliminarCliente.setText("Eliminar Cliente");
         btn_EliminarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_EliminarCliente.setFocusable(false);
+        btn_EliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EliminarClienteActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -247,6 +252,12 @@ public class MenuCliente extends javax.swing.JFrame {
         ModificarCliente ventana = new ModificarCliente(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_modificarClienteActionPerformed
+
+    private void btn_EliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarClienteActionPerformed
+        setVisible(false);
+        EliminarCliente ventana = new EliminarCliente(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_btn_EliminarClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

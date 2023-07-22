@@ -98,6 +98,11 @@ public class Menu extends javax.swing.JFrame {
         btn_salir.setText("Salir");
         btn_salir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_salir.setFocusable(false);
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contenedorPrincipalLayout = new javax.swing.GroupLayout(contenedorPrincipal);
         contenedorPrincipal.setLayout(contenedorPrincipalLayout);
@@ -196,6 +201,11 @@ public class Menu extends javax.swing.JFrame {
         RegistroCompra ventana = new RegistroCompra(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_RegistroCompraActionPerformed
+
+    private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
+        dispose();
+        
+    }//GEN-LAST:event_btn_salirActionPerformed
     
     public void initAlternComponents(){
         setTitle("Menu");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 13-07-2023 a las 21:56:02
+-- Tiempo de generación: 22-07-2023 a las 23:08:11
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.0.26
 
@@ -44,7 +44,24 @@ CREATE TABLE IF NOT EXISTS `clientes` (
 
 INSERT INTO `clientes` (`cedula`, `nombres`, `apellidos`, `direccion`, `email`, `telefono`) VALUES
 (1089096739, 'Andres Felipe', 'Cuervo Sanchez', 'Cuba', 'Cuervoandres95@gmail.com', '3218271281'),
-(10141132, 'Martha', 'Sanchez', 'Cuba', 'Martha@gmail.com', '32132112');
+(10141132, 'Martha', 'sfddfs', 'Cuba', 'marta@gmail.com', '34349843'),
+(1088009, 'Oscar', 'Loaiza', 'Calle 20', 'oscar@gmail.com', '3343253');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `item_factura`
+--
+
+DROP TABLE IF EXISTS `item_factura`;
+CREATE TABLE IF NOT EXISTS `item_factura` (
+  `id_factura` int NOT NULL,
+  `cliente` varchar(255) NOT NULL,
+  `id_producto` varchar(255) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `cantidad` int NOT NULL,
+  `precio` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -60,16 +77,14 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `precio` int NOT NULL,
   `costo` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `cantidad`, `precio`, `costo`) VALUES
-(5, 'Uva', 5, 500, 200),
-(6, 'Manzana', 3, 1500, 1000),
-(7, 'Fresa', 10, 600, 300);
+(11, 'Banano', 3, 1000, 500);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

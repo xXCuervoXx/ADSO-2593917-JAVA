@@ -153,7 +153,7 @@ public class MenuProducto extends javax.swing.JFrame {
 
         tabla_productos.setBackground(new java.awt.Color(255, 255, 255));
         tabla_productos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        tabla_productos.setForeground(new java.awt.Color(255, 255, 255));
+        tabla_productos.setForeground(new java.awt.Color(0, 0, 0));
         tabla_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -230,19 +230,19 @@ public class MenuProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_atrasActionPerformed
 
     private void btn_RegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegistrarProductoActionPerformed
-        setVisible(false);
+        dispose();
         RegistroProducto ventana = new RegistroProducto(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_RegistrarProductoActionPerformed
 
     private void btn_ModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ModificarProductoActionPerformed
-        setVisible(false);
+        dispose();
         ModificarProducto ventana = new ModificarProducto(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_ModificarProductoActionPerformed
 
     private void btn_EliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarProductoActionPerformed
-        setVisible(false);
+        dispose();
         EliminarProducto ventana = new EliminarProducto(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_EliminarProductoActionPerformed

@@ -55,6 +55,21 @@ public class Database {
             return false;
         }
     }
+    public boolean insertarItems(String cliente,String id_producto, String nombre, int cant, int precio){
+        String consulta = "INSERT INTO item_factura(cliente,id_producto, nombre, cantidad, precio) VALUES ('"+cliente+"','"+id_producto+"','"+nombre+"','"+cant+"','"+precio+"')";
+        try{
+            int respuesta = manipularDB.executeUpdate(consulta);
+            if (respuesta>0) {
+                System.out.println("REGISTRO INSERTADO CON EXITO");
+                return true;
+            }else{
+                return false;
+            }
+        }catch(SQLException e){
+            System.out.println("Error al insertar: "+e.getMessage());
+            return false;
+        }
+    }
     public Producto [] listaProducto(){
         Producto [] listaProducto = new Producto[100];
         try{
@@ -150,7 +165,7 @@ public class Database {
         String telefono = temp.getTelefono();
         
         try {
-            String consulta = "UPDATE cliente SET nombres='"+nombres+"',apellidos='"+apellidos+"',direccion='"+direccion+"',email='"+email+"',telefono='"+telefono+"' WHERE cedula='"+cedula+"' ";
+            String consulta = "UPDATE clientes SET nombres='"+nombres+"',apellidos='"+apellidos+"',direccion='"+direccion+"',email='"+email+"',telefono='"+telefono+"' WHERE cedula='"+cedula+"' ";
             int resp = manipularDB.executeUpdate(consulta);
             if (resp>0) {
                 respuesta = true;
@@ -171,6 +186,20 @@ public class Database {
             }
         } catch (SQLException e) {
             System.out.println("--> Error Delete: " + e.getMessage());
+        }
+        return respuesta;
+    }
+    public boolean eliminarCliente(int cedula){
+        boolean respuesta = false;
+        try {
+            String consulta = "DELETE FROM clientes WHERE cedula='"+cedula+"'";
+            int resp_consulta = manipularDB.executeUpdate(consulta);
+            if (resp_consulta==1) {
+                System.out.println("-->Se ha eliminado el cliente con exito");
+                respuesta = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("-->Error Delete: " + e.getMessage());
         }
         return respuesta;
     }
