@@ -55,8 +55,8 @@ public class Database {
             return false;
         }
     }
-    public boolean insertarItems(String cliente,String id_producto, String nombre, int cant, int precio){
-        String consulta = "INSERT INTO item_factura(cliente,id_producto, nombre, cantidad, precio) VALUES ('"+cliente+"','"+id_producto+"','"+nombre+"','"+cant+"','"+precio+"')";
+    public boolean insertarItems(String cliente,String id_producto, String nombre, int cant, int precio, String fecha){
+        String consulta = "INSERT INTO item_factura(cliente,id_producto, nombre, cantidad, precio,fecha) VALUES ('"+cliente+"','"+id_producto+"','"+nombre+"','"+cant+"','"+precio+"','"+fecha+"')";
         try{
             int respuesta = manipularDB.executeUpdate(consulta);
             if (respuesta>0) {
@@ -108,6 +108,26 @@ public class Database {
             return listaCliente;
         }
     }
+    public Productos [] listaItems(){
+        Productos [] productos = new Productos[100];
+        try{
+            ResultSet registros = this.manipularDB.executeQuery("SELECT * FROM item_factura");
+            registros.next();
+            if (registros.getRow()==1) {
+                int indice = 0;
+                do{
+                    Productos temp = new Productos(registros.getString("cliente"), registros.getString("id_producto"), registros.getString("nombre"),registros.getInt("cantidad"),registros.getInt("precio"), registros.getString("fecha"));
+                    productos[indice] = temp;
+                    indice++;
+                }while(registros.next());
+            }
+            return productos;
+        }catch (SQLException e){
+            System.out.println("Error en SELECT: "+e.getMessage());
+            return productos;
+        }
+    }
+    
     public Producto buscarProducto(int id){
         Producto temp = null;
         try{
@@ -115,6 +135,20 @@ public class Database {
             registros.next();
             if (registros.getRow()==1){
                 temp = new Producto (registros.getInt("id"),registros.getString("nombre"),registros.getInt("cantidad"),registros.getInt("costo"),registros.getInt("precio"));
+            }
+            return temp;
+        }catch (SQLException e){
+            System.out.println("Error en SELECT: "+e.getMessage());
+            return temp;
+        }
+    }
+    public Productos buscarItem(String fecha){
+        Productos temp = null;
+        try{
+            ResultSet registros = this.manipularDB.executeQuery("SELECT * FROM item_factura WHERE fecha='"+fecha+"' ");
+            registros.next();
+            if (registros.getRow()==1){
+                temp = new Productos (registros.getString("cliente"),registros.getString("id_producto"),registros.getString("nombre"),registros.getInt("cantidad"),registros.getInt("precio"), registros.getString(fecha));
             }
             return temp;
         }catch (SQLException e){
@@ -150,6 +184,47 @@ public class Database {
             if (resp>0) {
                 respuesta = true;
             }
+            System.out.println("Se ha modificado el producto con EXITO!!");
+        }catch (SQLException e){
+            System.out.println("Error en UPDATE: "+e.getMessage());
+        }
+        return respuesta;
+    }
+    public boolean editarProductoDev(Producto temp){
+        boolean respuesta = false;
+        int id = temp.getId();
+        String nombre = temp.getNombre();
+        int cantidad = temp.getCantidad();
+        int costo = temp.getValorU();
+        int precio = temp.getPrecio();
+        
+        try {
+            String consulta = "UPDATE productos SET cantidad='"+cantidad+"' WHERE id='"+id+"' ";
+            int resp = manipularDB.executeUpdate(consulta);
+            if (resp>0) {
+                respuesta = true;
+            }
+            System.out.println("Se ha modificado el producto con EXITO!!");
+        }catch (SQLException e){
+            System.out.println("Error en UPDATE: "+e.getMessage());
+        }
+        return respuesta;
+    }
+    public boolean editarProducto2(Producto temp){
+        boolean respuesta = false;
+        int id = temp.getId();
+        String nombre = temp.getNombre();
+        int cantidad = temp.getCantidad();
+        int costo = temp.getValorU();
+        int precio = temp.getPrecio();
+        
+        try {
+            String consulta = "UPDATE productos SET cantidad='"+cantidad+"' WHERE id='"+id+"' ";
+            int resp = manipularDB.executeUpdate(consulta);
+            if (resp>0) {
+                respuesta = true;
+            }
+            System.out.println("Se ha modificado el producto con EXITO!!");
         }catch (SQLException e){
             System.out.println("Error en UPDATE: "+e.getMessage());
         }

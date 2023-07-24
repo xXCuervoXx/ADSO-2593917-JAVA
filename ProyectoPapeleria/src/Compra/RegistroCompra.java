@@ -8,6 +8,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,7 +21,7 @@ import proyectopapeleria.Menu;
 
 public class RegistroCompra extends javax.swing.JFrame {
     RegistroCompra ventanaMenu;
-    public Database database;
+    Database database;
     Menu ventana;
     DefaultTableModel modelo;
     private Cliente listaCliente[];
@@ -30,6 +34,7 @@ public class RegistroCompra extends javax.swing.JFrame {
     int guardar_producto;
     int contClicks;
     String cliente;
+    int valor;
     public RegistroCompra(Menu ventana) {
         this.guardarProducto = "";
         this.guardarPrecio = 0;
@@ -44,6 +49,7 @@ public class RegistroCompra extends javax.swing.JFrame {
         this.i=i;
         this.cliente=cliente;
         this.contClicks=contClicks;
+        this.valor=valor;
         initComponents();
         initAlternComponents();
     }
@@ -97,6 +103,7 @@ public class RegistroCompra extends javax.swing.JFrame {
         jLabel2.setText("Cedula Cliente:");
 
         btn_buscar.setText("Buscar");
+        btn_buscar.setFocusable(false);
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscarActionPerformed(evt);
@@ -180,6 +187,7 @@ public class RegistroCompra extends javax.swing.JFrame {
 
         btn_agregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_agregar.setText("Agregar");
+        btn_agregar.setFocusable(false);
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_agregarActionPerformed(evt);
@@ -188,6 +196,7 @@ public class RegistroCompra extends javax.swing.JFrame {
 
         btn_buscarProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_buscarProducto.setText("Buscar");
+        btn_buscarProducto.setFocusable(false);
         btn_buscarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscarProducto_buscarProductoActionPerformed(evt);
@@ -196,6 +205,7 @@ public class RegistroCompra extends javax.swing.JFrame {
 
         btn_salir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_salir.setText("Salir");
+        btn_salir.setFocusable(false);
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salirActionPerformed(evt);
@@ -223,6 +233,7 @@ public class RegistroCompra extends javax.swing.JFrame {
 
         btn_facturar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_facturar.setText("Facturar");
+        btn_facturar.setFocusable(false);
         btn_facturar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_facturarActionPerformed(evt);
@@ -467,23 +478,31 @@ public class RegistroCompra extends javax.swing.JFrame {
         String product = campo_nombre.getText();
         int cant = Integer.valueOf(campo_cant.getText());
         int precio = 0;
+        
         this.guardar_producto=Integer.valueOf(campo_id.getText());
         for(int i = 0; i < this.listaProducto.length;i++){
             if(this.listaProducto[i]!=null){
                 if(this.listaProducto[i].getId()==this.guardar_producto){
                     precio = this.listaProducto[i].getPrecio();
+                    this.valor = cant*precio;
+                    
                 }
             }
         }
             
         JLabel cosas = new JLabel("ID      PRODUCTO      CANTIDAD");
-        JLabel productos = new JLabel("->"+id+" - "+product+" - "+cant+" - "+precio);
+        JLabel productos = new JLabel("->"+id+" - "+product+" - "+cant+" - "+valor);
         Font letra = new Font("Arial", Font.BOLD, 15);
         cosas.setFont(letra);
         productos.setFont(letra);
         contenedor_productos.add(productos);
-         this.scroll_lista.revalidate();
-        Productos temp = new Productos(id, product, cant, precio);
+        this.scroll_lista.revalidate();
+        String cliente = campo_nombres.getText();
+        Date fechaActual = new Date(Calendar.getInstance().getTimeInMillis());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        
+        String fecha = formato.format(fechaActual);
+        Productos temp = new Productos(id,cliente, product, cant, valor, fecha);
         this.productos[this.i]=temp;
         i++;
             
@@ -493,6 +512,8 @@ public class RegistroCompra extends javax.swing.JFrame {
             }
         }
         System.out.println("->"+id+" - "+product+" - "+cant+" - "+precio);
+        campo_id.setText("");
+        campo_nombre.setText("");
         this.contClicks++;
     }//GEN-LAST:event_btn_agregarActionPerformed
 
@@ -502,19 +523,46 @@ public class RegistroCompra extends javax.swing.JFrame {
 
     private void btn_facturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_facturarActionPerformed
         String nombreCliente = campo_nombres.getText();
+        int id2=0;
+        String nombre = "";
+        int cant = 0;
+        int precio = 0;
+        String date = "";
+        
         for(int i = 0; i < this.contClicks;i++){
             if(this.productos[i]!=null){
-                System.out.println(" - "+nombreCliente+" - "+this.productos[i].getId()+" - "+this.productos[i].getNombre()+" - "+this.productos[i].getCant()+" - "+this.productos[i].getPrecio());
+               
+                System.out.println(" - "+nombreCliente+" - "+this.productos[i].getId()+" - "+this.productos[i].getNombre()+" - "+this.productos[i].getCant()+" - "+this.productos[i].getPrecio()+" - "+date);
                 String id = this.productos[i].getId();
-                String nombre = this.productos[i].getNombre();
-                int cant = this.productos[i].getCant();
-                int precio = this.productos[i].getPrecio();
-                boolean proceso = this.ventanaMenu.database.insertarItems(nombreCliente,id,nombre,cant, precio);
+                id2 = Integer.valueOf(this.productos[i].getId());
+                nombre = this.productos[i].getNombre();
+                cant = this.productos[i].getCant();
+                precio = this.productos[i].getPrecio();
+                date = this.productos[i].getFecha();
+                boolean proceso = this.database.insertarItems(nombreCliente,id,nombre,cant, valor, date);
+                
             
-            }else if(this.productos[i]==null){
-                break;
             }
+            for(int j = 0; j < this.listaProducto.length; j++){
+                if(this.listaProducto[j]!=null){
+                    int comparador = Integer.valueOf(this.listaProducto[j].getId());
+                    if(comparador==id2){
+                        int resta = this.listaProducto[j].getCantidad()-cant;
+                        int costo = this.listaProducto[j].getValorU();
+                        if(resta>=0){
+                            Producto temporal = new Producto (id2, nombre, resta,costo, precio);
+                            boolean cambio = this.database.editarProducto2(temporal);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "ERROR no hay suficientes cantidades de "+nombre+"  en el inventario");
+                        }
+                        
+                    }
+                }
+            }
+                
         }
+        this.ventana.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btn_facturarActionPerformed
 
     public void initAlternComponents(){
@@ -527,14 +575,8 @@ public class RegistroCompra extends javax.swing.JFrame {
         campo_email.setEnabled(false);
         campo_telefono.setEnabled(false);
         contenedor_productos.setLayout( new BoxLayout(contenedor_productos, BoxLayout.Y_AXIS) );
-        contenedor_productos.setBackground(Color.BLACK);
+        contenedor_productos.setBackground(Color.WHITE);
     }
-        
-        
-        public void buscarProducto(){
-            
-        }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;

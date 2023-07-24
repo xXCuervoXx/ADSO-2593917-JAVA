@@ -22,7 +22,9 @@ public class MenuProducto extends javax.swing.JFrame {
         this.database= new Database();
         this.listaProducto= this.database.listaProducto();
         initComponents();
+        revalidate();
         initAlternComponent();
+        
         
         
     }
@@ -162,7 +164,7 @@ public class MenuProducto extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Producto", "Cantidad Inventario", "Precio Unidad", "Costo"
+                "ID", "Producto", "Cantidad Inventario", "Costo ", "Precio"
             }
         ));
         tabla_productos.setSelectionBackground(new java.awt.Color(204, 204, 204));

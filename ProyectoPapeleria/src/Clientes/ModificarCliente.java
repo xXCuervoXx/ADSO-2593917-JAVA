@@ -110,16 +110,16 @@ public class ModificarCliente extends javax.swing.JFrame {
         etq_nombres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etq_nombres.setText("Nombres:");
 
-        campo_nombres.setBackground(new java.awt.Color(204, 204, 204));
-        campo_nombres.setForeground(new java.awt.Color(0, 0, 0));
+        campo_nombres.setBackground(new java.awt.Color(0, 0, 0));
+        campo_nombres.setForeground(new java.awt.Color(255, 255, 255));
         campo_nombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campo_nombresActionPerformed(evt);
             }
         });
 
-        campo_apellidos.setBackground(new java.awt.Color(204, 204, 204));
-        campo_apellidos.setForeground(new java.awt.Color(0, 0, 0));
+        campo_apellidos.setBackground(new java.awt.Color(0, 0, 0));
+        campo_apellidos.setForeground(new java.awt.Color(255, 255, 255));
 
         etq_apellidos.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         etq_apellidos.setForeground(new java.awt.Color(0, 0, 0));
@@ -131,11 +131,11 @@ public class ModificarCliente extends javax.swing.JFrame {
         etq_direccion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etq_direccion.setText("Direccion:");
 
-        campo_direccion.setBackground(new java.awt.Color(204, 204, 204));
-        campo_direccion.setForeground(new java.awt.Color(0, 0, 0));
+        campo_direccion.setBackground(new java.awt.Color(0, 0, 0));
+        campo_direccion.setForeground(new java.awt.Color(255, 255, 255));
 
-        campo_email.setBackground(new java.awt.Color(204, 204, 204));
-        campo_email.setForeground(new java.awt.Color(0, 0, 0));
+        campo_email.setBackground(new java.awt.Color(0, 0, 0));
+        campo_email.setForeground(new java.awt.Color(255, 255, 255));
 
         etq_email.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         etq_email.setForeground(new java.awt.Color(0, 0, 0));
@@ -147,8 +147,8 @@ public class ModificarCliente extends javax.swing.JFrame {
         etq_telefono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etq_telefono.setText("Telefono:");
 
-        campo_telefono.setBackground(new java.awt.Color(204, 204, 204));
-        campo_telefono.setForeground(new java.awt.Color(0, 0, 0));
+        campo_telefono.setBackground(new java.awt.Color(0, 0, 0));
+        campo_telefono.setForeground(new java.awt.Color(255, 255, 255));
 
         tabla_datos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -344,6 +344,11 @@ public class ModificarCliente extends javax.swing.JFrame {
             campo_direccion.setText(temporal.getDireccion());
             campo_email.setText(temporal.getEmail());
             campo_telefono.setText(temporal.getTelefono());
+            campo_nombres.setEnabled(true);
+            campo_apellidos.setEnabled(true);
+            campo_direccion.setEnabled(true);
+            campo_email.setEnabled(true);
+            campo_telefono.setEnabled(true);
             containerBuscar.setBackground(Color.blue);
             btn_modificar.setEnabled(true);
             

@@ -296,6 +296,15 @@ public class ModificarProducto extends javax.swing.JFrame {
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         this.guardar_id = Integer.parseInt(campo_idBuscar.getText());
+        if(campo_idBuscar.equals("")){
+            campo_idBuscar.setText("");
+            campo_producto.setText("");
+            campo_cantidad.setText("");
+            campo_costo.setText("");
+            campo_precio.setText("");
+        }
+        
+        
         
         Producto temporal = (this.ventanaMenu.database.buscarProducto(this.guardar_id));
         
@@ -313,7 +322,13 @@ public class ModificarProducto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "NO existe ningun producto con ese id");
             campo_idBuscar.setText("");
             btn_modificar.setEnabled(false);
+            campo_producto.setText("");
+            campo_cantidad.setText("");
+            campo_costo.setText("");
+            campo_precio.setText("");
+            
         }
+        revalidate();
     }//GEN-LAST:event_btn_buscarActionPerformed
     public void initAlternComponents(){
         this.modelo= (DefaultTableModel) this.tabla_datos.getModel();

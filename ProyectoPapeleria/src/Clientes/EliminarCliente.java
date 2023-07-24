@@ -138,14 +138,15 @@ public class EliminarCliente extends javax.swing.JFrame {
                 if(eliminar[i].isSelected()){
                     int id = listaCliente[i].getCedula();
                     boolean temp = this.ventanaMenu.database.eliminarCliente(id);
-                    JOptionPane.showMessageDialog(this, "ERROR, todos los campos son obligatorios");
                     
-                }else{
-                    JOptionPane.showMessageDialog(this, "Ningun campo fue seleccionado");
+                    
                 }
                 
             }
         }
+        JOptionPane.showMessageDialog(this, "Se ha eliminado correctamente");
+        this.ventanaMenu.setVisible(true);
+        dispose();
         mostrarDatosCliente();
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
