@@ -1,0 +1,49 @@
+<?php
+  $dataHeader['titulo'] = "Ver Usuarios";
+  $this->load->view('layouts/header', $dataHeader);
+?>
+<?php
+  $dataSidebar['session'] = $session;
+  $dataSidebar['optionSelected'] = 'openListUsers';
+  $this->load->view('layouts/sidebar', $dataSidebar);
+?>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <div class="col-12 m-0 p-3">
+          <h1 class="text-primary text-center">TABLA CON LISTA DE USUARIOS</h1>
+          <br>
+          <table class="col-12 border border-1">
+            <thead>
+              <th>cedula</th>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Telefono</th>
+              <th>Direccion</th>
+              <th>Email</th>
+              <th>foto</th>
+            </thead>
+            <tbody>
+              <?php
+              $count=0;
+                foreach ($personas as $persona) {
+                  echo '
+                      <tr>
+                        <td>'.++$count.'</td>    
+                        <td>'.$persona->nombres.'</td>    
+                        <td>'.$persona->apellidos.'</td>    
+                        <td>'.$persona->telefono.'</td>    
+                      </tr>    
+                    ';
+                }
+              ?>
+                
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+<?php
+  $this->load->view('layouts/footer');
+?>
+
+      
