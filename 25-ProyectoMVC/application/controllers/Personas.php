@@ -27,10 +27,16 @@ class Personas extends CI_Controller {
         $data["email"] = $this->input->post("email");
         $data["foto"] = $this->input->post("foto");
         $this->PersonasModel->insertarPersona($data);
+        redirect('admin/inicio/openCreateUser');
 	}
     public function editarUsuario(){
         $cedulaBuscar = $this->input->post("cedulaBuscar");
         $this->PersonasModel->editUsuario($cedulaBuscar);
+    }
+    public function eliminar($persona_cedula){
+        $this->PersonasModel->deletePersona($persona_cedula);
+        redirect('admin/inicio/openDeleteUsers');
+        
     }
 
 

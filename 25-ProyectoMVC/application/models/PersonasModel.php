@@ -34,7 +34,7 @@ class PersonasModel extends CI_Model {
 		// $this->db->from('personas');
 		// return $this->db->get()->result();
 		$this->db->select();
-        $this->db->from($this->personas);
+        $this->db->from('personas');
         $query = $this->db->get();
 		if($query->num_rows()>0){
 			return $query->result();
@@ -51,6 +51,10 @@ class PersonasModel extends CI_Model {
 		// }
 		
 		
+	}
+	public function deletePersona($persona_cedula){
+		$this->db->where('cedula',$persona_cedula);
+		$this->db->delete('personas');
 	}
 
 }

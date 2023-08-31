@@ -1,29 +1,61 @@
 <?php
-  $dataHeader['titulo'] = "Editar Usuario";
+  $dataHeader['titulo'] = "Edita usuarios";
   $this->load->view('layouts/header', $dataHeader);
 ?>
 <?php
   $dataSidebar['session'] = $session;
-  $dataSidebar['optionSelected'] = 'openEditarUser';
+  $dataSidebar['optionSelected'] = 'openEditUsers';
   $this->load->view('layouts/sidebar', $dataSidebar);
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <div class="col-12 m-0 p-3">
-          <form action="<?=base_url('index.php/Personas/editarUsuario')?>" method="post">
-            <div class="row p-0 m-0 text-center">
-              <label for="" class="text-primary form-label"><h1><b>INGRESE LA CEDULA DEL USUARIO A BUSCAR</b></h1></label>
-              <div class="col-10 ms-3">
-                <input type="text" name="cedulaBuscar" class="form-control">
-              </div>
-              <div class="col-1">
-                <input type="submit" class="btn btn-primary" value="Buscar">
-              </div>
-            </div>
-          </form>
+          <h1 class="text-primary text-center">TABLA CON LISTA DE USUARIOS</h1>
+          <br>
+          <table class="col-12 border border-1 table table-striped">
+            <thead>
+              <th>#</th>
+              <th>cedula</th>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Telefono</th>
+              <th>Direccion</th>
+              <th>Email</th>
+              <th>foto</th>
+            </thead>
+            <tbody>
+              <?php
+              $count=0;
+                foreach ($personas as $persona) {
+                  echo '
+                      <tr>
+                        <td>'.++$count.'</td>    
+                        <td>'.$persona->cedula.'</td>    
+                        <td>'.$persona->nombres.'</td>    
+                        <td>'.$persona->apellidos.'</td>    
+                        <td>'.$persona->telefono.'</td>    
+                        <td>'.$persona->direccion.'</td>    
+                        <td>'.$persona->email.'</td>    
+                        <td>'.$persona->foto.'</td>
+                        <td><button type="button" class="btn btn-warning text-white" onclick="llenar_datos('.$persona->cedula'.`'.$persona->nombres'`.`'.$persona->apellidos'`.`'.$persona->telefono'`.`'.$persona->direccion'`.`'.$persona->email'`.`'.$persona->foto'`)">Editar</button></td>
+                            
+                      </tr>    
+                    ';
+                }
+              ?>
+                
+            </tbody>
+          </table>
         </div>
       </div>
+      <script>
+        const llenar_datos - (id, nombres, apellidos, telefono, direccion, email, foto) -> {
+          console.log(id, nombres, apellidos, telefono, direccioon, email, foto);
+        };
+      </script>
 
 <?php
   $this->load->view('layouts/footer');
 ?>
+
+      
