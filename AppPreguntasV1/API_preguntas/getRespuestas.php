@@ -1,9 +1,10 @@
 <?php
     include "conexion.php";
 
-    if((!empty($_GET['id_cuestionario']))|| (!empty($_POST['id_cuestionario']))){
-
-        $consulta_r = $base_de_datos->prepare("SELECT * FROM respuestas WHERE id_cuestionario =" .$_GET['id_cuestionario']);
+    if((!empty($_GET['id_cuestionario'])) || (!empty($_POST['id_cuestionario'])) ){
+        $id_cuestionario =(!empty($_POST['id_cuestionario']))? $_POST['id_cuestionario'] : $_GET['id_cuestionario'];
+        $consulta_r = $base_de_datos->prepare("SELECT * FROM respuestas WHERE id_cuestionario = :idc");
+        $consulta_r->bindParam(":idc", $id_cuestionario);
         $consulta_r->execute();
         $preguntas = $consulta_r->fetchAll(PDO::FETCH_ASSOC);
 
@@ -18,8 +19,8 @@
                 $consulta_p = $base_de_datos->prepare("SELECT  preguntas.id, preguntas.descripcion, preguntas.id_correcta, preguntas.url_imagen,respuestas.id_respuesta, respuestas.respuesta, respuestas.estado 
                                                         FROM preguntas 
                                                         JOIN respuestas ON respuestas.id_pregunta = preguntas.id 
-                                                        WHERE id = :idr");
-                 $consulta_p->bindParam(":idr",$id_respuesta);
+                                                        WHERE id = :idr AND respuestas.id_cuestionario=$id_cuestionario");
+                $consulta_p->bindParam(":idr",$id_respuesta);
                 $consulta_p->execute();
                 $pregunta = $consulta_p->fetch(PDO::FETCH_ASSOC);
 

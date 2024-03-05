@@ -26,23 +26,9 @@
             android:text="Tus Cuestionarios:"
             ></TextView>
 
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="35dp"
-        android:orientation="vertical"
-        android:paddingBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        >
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:paddingBottom="10dp"
             >
@@ -50,14 +36,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/container_cuestionarios"
-                android:layout_gravity="center"
                 android:layout_marginTop="35dp"
                 android:orientation="vertical">
 
 
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nuevo cuestionario"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="15dp"
+        android:backgroundTint="#0023A1"
+        android:textSize="10sp"
+        android:onClick="nuevoCuestionario"
+        ></Button>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +63,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="15dp"
         android:backgroundTint="#A10000"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:onClick="cerrarSesion"
         ></Button>
 </FrameLayout>

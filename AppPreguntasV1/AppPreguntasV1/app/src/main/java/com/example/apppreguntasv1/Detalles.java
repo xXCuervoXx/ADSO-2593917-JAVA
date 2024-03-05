@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,6 +31,8 @@ public class Detalles extends AppCompatActivity {
     Config config;
     TextView etq_nombre;
     LinearLayout container_datos;
+
+    LinearLayout container_preguntas;
     String cuestionario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class Detalles extends AppCompatActivity {
         SharedPreferences archivo = getSharedPreferences("app-preguntas",MODE_PRIVATE);
         etq_nombre=findViewById(R.id.etq_nombre);
         container_datos = findViewById(R.id.container_datos);
+        container_preguntas = findViewById(R.id.container_preguntas);
         etq_nombre.setText(archivo.getString("nombres",""));
         config = new Config(getApplicationContext());
 
@@ -74,23 +79,44 @@ public class Detalles extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     System.out.println("El servidor POST responde OK respuesta");
-                    JSONObject jsonObject = new JSONObject(response);
                     System.out.print(response);
-                    System.out.print("-----------------------------------");
-                    JSONArray respuesta = jsonObject.getJSONArray("respuesta");
+                    JSONObject jsonObject = new JSONObject(response);
 
-                    for (int i = 0; i < respuesta.length(); i++) {
-                        JSONObject respuestaObject = respuesta.getJSONObject(i);
-                        JSONObject pregunta = respuestaObject.getJSONObject("pregunta");
+                    Boolean status = jsonObject.getBoolean("status");
+                    if(status){
+                        JSONArray respuestaArray = jsonObject.getJSONArray("respuesta");
 
-                        int id = pregunta.getInt("id");
-                        System.out.println("id======"+id);
+                        for (int i = 0; i < respuestaArray.length(); i++) {
+                            JSONObject respuestaObject = respuestaArray.getJSONObject(i);
+                            JSONObject pregunta = respuestaObject.getJSONObject("pregunta");
+
+                            String id = pregunta.getString("id");
+                            String descripcion = pregunta.getString("descripcion");
+                            String id_correcta = pregunta.getString("id_correcta");
+                            String url_imagen = pregunta.getString("url_imagen");
+                            String id_respuesta = pregunta.getString("id_respuesta");
+                            String answer = pregunta.getString("respuesta");
+                            String estado = pregunta.getString("estado");
 
 
+                            int iterador = i;
 
+                            mostrarPreguntas(iterador,id, descripcion, id_correcta, url_imagen, id_respuesta, estado);
+
+                            JSONArray opciones = respuestaObject.getJSONArray("opciones");
+                            for (int j = 0; j < opciones.length(); j++){
+                                JSONObject key_opcion = opciones.getJSONObject(j);
+                                String id_opcion = key_opcion.getString("id");
+                                String id_pregunta = key_opcion.getString("id_pregunta");
+                                String descri = key_opcion.getString("descripcion");
+
+                                mostrarOpciones(estado, answer ,id_respuesta,id_correcta,id_opcion, id_pregunta, descri);
+
+
+                            }
+                            espacio();
+                        }
                     }
-
-
                 } catch (JSONException e) {
                     System.out.println("El servidor POST responde con un error:");
                     System.out.println(e.getMessage());
@@ -116,5 +142,38 @@ public class Detalles extends AppCompatActivity {
         queue.add(solicitud);
 
 
+    }
+
+    public void mostrarPreguntas(int iterador,String id, String descripcion, String id_correcta, String url_imagen, String id_respuesta, String estado){
+        TextView preguntas = new TextView(this);
+        preguntas.setText("Pregunta "+(iterador+1)+": "+"\n"
+                            + descripcion);
+        preguntas.setBackgroundColor(Color.parseColor("#C8f4cf"));
+
+        container_preguntas.addView(preguntas);
+    }
+
+    public void mostrarOpciones(String estado,String respuesta,String id_respuesta, String correcta,String id_opcion, String id_pregunta, String descripcion){
+        TextView opciones = new TextView(this);
+        opciones.setText("■ "+descripcion);
+        if (respuesta.equals(descripcion) && estado.equals("OK")){
+            opciones.setTextColor(Color.parseColor("#75B84A"));
+
+
+        } else if(respuesta.equals(descripcion) && estado.equals("ERROR")){
+            opciones.setTextColor(Color.RED);
+        }
+        container_preguntas.addView(opciones);
+
+    }
+    public void espacio(){
+        TextView espacio = new TextView(this);
+        espacio.setText("");
+        container_preguntas.addView(espacio);
+    }
+
+    public void volver(View v){
+        Intent intencion = new Intent(getApplicationContext(), Resumen.class);
+        startActivity(intencion);
     }
 }

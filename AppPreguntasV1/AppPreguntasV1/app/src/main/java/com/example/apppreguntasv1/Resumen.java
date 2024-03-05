@@ -123,6 +123,8 @@ public class Resumen extends AppCompatActivity {
                     +"Fecha Inicio: "+fecha_inicio+"\n"
                     +"N°Preguntas: "+cant_preguntas+"\n"
                     +"N°ok: "+cant_ok+" - "+"N°error: "+cant_error);
+        boton.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+        boton.setPadding(20,15,20,15);
         boton.setBackgroundResource(R.drawable.border_button);
         boton.setBackgroundColor(Color.parseColor("#C8f4cf"));
 
@@ -160,5 +162,11 @@ public class Resumen extends AppCompatActivity {
         intencion.putExtra("fecha_inicio", fecha_inicio);
         intencion.putExtra("fecha_fin", fecha_fin);
         startActivity(intencion);
+    }
+
+    public void nuevoCuestionario(View v){
+        Intent intencion = new Intent(getApplicationContext(), NewQuestion.class);
+        startActivity(intencion);
+
     }
 }
