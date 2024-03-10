@@ -1,9 +1,9 @@
 <?php
  include "conexion.php";
 
-   if (!empty($_GET['id_usuario']) && !empty($_GET['fecha_inicio'])) {
-      $id_usuario = $_GET['id_usuario'];
-      $fecha_inicio = $_GET['fecha_inicio'];
+   if ((!empty($_GET['id_usuario']) && !empty($_GET['fecha_inicio'])) || (!empty($_POST['id_usuario']) && !empty($_POST['fecha_inicio'])) ) {
+      $id_usuario = (!empty($_POST['id_usuario']))? $_POST['id_usuario'] : $_GET['id_usuario'];;
+      $fecha_inicio = (!empty($_POST['fecha_inicio']))? $_POST['fecha_inicio'] : $_GET['fecha_inicio'];;
 
       $consulta = $base_de_datos->prepare("INSERT INTO cuestionarios(id_usuario, fecha_inicio) VALUES(:idu, :fec)");
       $consulta -> bindParam(':idu', $id_usuario);

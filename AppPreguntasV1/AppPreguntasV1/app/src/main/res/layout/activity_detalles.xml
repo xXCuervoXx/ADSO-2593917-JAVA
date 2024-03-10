@@ -24,31 +24,22 @@
         >
 
     </LinearLayout>
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+
         >
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-
+            android:id="@+id/container_preguntas"
+            android:orientation="vertical"
             >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/container_preguntas"
-                android:orientation="vertical"
-                >
+        </LinearLayout>
+    </ScrollView>
 
-
-            </LinearLayout>
-        </ScrollView>
-
-    </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

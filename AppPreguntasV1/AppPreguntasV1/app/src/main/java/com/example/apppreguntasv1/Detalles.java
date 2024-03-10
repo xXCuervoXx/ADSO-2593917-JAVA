@@ -111,8 +111,6 @@ public class Detalles extends AppCompatActivity {
                                 String descri = key_opcion.getString("descripcion");
 
                                 mostrarOpciones(estado, answer ,id_respuesta,id_correcta,id_opcion, id_pregunta, descri);
-
-
                             }
                             espacio();
                         }
@@ -138,10 +136,7 @@ public class Detalles extends AppCompatActivity {
                 return params;
             }
         };
-
         queue.add(solicitud);
-
-
     }
 
     public void mostrarPreguntas(int iterador,String id, String descripcion, String id_correcta, String url_imagen, String id_respuesta, String estado){
@@ -158,8 +153,6 @@ public class Detalles extends AppCompatActivity {
         opciones.setText("■ "+descripcion);
         if (respuesta.equals(descripcion) && estado.equals("OK")){
             opciones.setTextColor(Color.parseColor("#75B84A"));
-
-
         } else if(respuesta.equals(descripcion) && estado.equals("ERROR")){
             opciones.setTextColor(Color.RED);
         }
