@@ -9,6 +9,12 @@
     android:padding="10dp">
 
     <ImageView
+        android:id="@+id/loadListaPokemon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"></ImageView>
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:src="@drawable/titulo_pokemon"
@@ -36,8 +42,8 @@
             android:text="ANTERIOR"
             android:layout_gravity="bottom|left"
             android:layout_weight="1"
-            android:background="#A50202"
-            android:backgroundTint="#4CAF50"
+            android:background="@drawable/button_background"
+
 
             ></Button>
         <Button
@@ -47,7 +53,8 @@
             android:text="SIGUIENTE"
             android:layout_gravity="bottom|right"
             android:layout_weight="1"
-            android:background="@color/black"
+            android:background="@drawable/button_background"
+
             ></Button>
     </LinearLayout>
 

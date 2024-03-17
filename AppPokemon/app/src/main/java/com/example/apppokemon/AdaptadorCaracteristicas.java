@@ -9,8 +9,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AdaptadorCaracteristicas extends RecyclerView.Adapter< AdaptadorCaracteristicas.ViewHolder >{
@@ -49,6 +53,8 @@ public class AdaptadorCaracteristicas extends RecyclerView.Adapter< AdaptadorCar
         String url_pokemons;
         String [] lenght;
 
+        ImageView loadListaPokemons;
+
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -56,20 +62,20 @@ public class AdaptadorCaracteristicas extends RecyclerView.Adapter< AdaptadorCar
 
             contexto = itemView.getContext();
             etq_img = itemView.findViewById(R.id.etq_img);
+            loadListaPokemons = itemView.findViewById(R.id.loadListaPokemon);
+            Glide.with(contexto)
+                    .asGif()
+                    .load(R.drawable.loading_pokeball)
+                    .into(loadListaPokemons);
+            loadListaPokemons.setVisibility(View.VISIBLE);
 
         }
 
         public void cargarDatos(Caracteristicas datos){
-            String[] listaImg = datos.getListaImg();
-            if (listaImg != null && listaImg.length > 0) {
-                for (int i = 0; i < listaImg.length; i++){
-                    // Obtener la URL de la imagen para la posición actual (por ejemplo, la primera posición en este caso)
-                    String urlImagen = listaImg[i]; // Aquí puedes especificar el índice de la imagen que deseas mostrar
-
-                    // Cargar la imagen en el ImageView utilizando Picasso u otra biblioteca de manejo de imágenes
-                    Picasso.get().load(urlImagen).into(etq_img); // Aquí utilizo Picasso como ejemplo, asegúrate de incluir la dependencia en tu archivo build.gradle
-                }
-            }
+            loadListaPokemons.setVisibility(View.GONE);
+            RequestQueue queue = Volley.newRequestQueue(contexto.getApplicationContext());
+            String listaImg = datos.getListaImg();
+            Picasso.get().load(listaImg).into(etq_img);
 
         }
     }

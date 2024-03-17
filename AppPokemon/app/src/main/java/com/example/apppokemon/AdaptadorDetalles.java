@@ -90,8 +90,9 @@ public class AdaptadorDetalles extends RecyclerView.Adapter< AdaptadorDetalles.V
         public void cargarDatos(Pokemon datos) {
 
             etq_nombre.setText(datos.getNombre());
-            String id = String.valueOf(datos.getId_pokemon());
-            etq_idPokemon.setText(id);
+            int offset = datos.getId_pokemon();
+            String off = String.valueOf(offset);
+            etq_idPokemon.setText(off);
             nombre = datos.getNombre();
             etq_url = datos.getUrl();
 

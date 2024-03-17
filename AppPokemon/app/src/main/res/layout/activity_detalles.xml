@@ -8,12 +8,18 @@
     android:orientation="vertical"
     android:padding="10dp">
     <ImageView
+        android:id="@+id/loadListaPokemon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"></ImageView>
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:src="@drawable/titulo_pokemon"
         android:layout_marginBottom="10dp"
         ></ImageView>
     <TextView
+        android:gravity="center"
         android:id="@+id/etq_nombre"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -49,6 +55,7 @@
             android:layout_height="wrap_content"
             android:text="XXXX"
             android:textSize="18sp"
+            android:paddingHorizontal="5dp"
             ></TextView>
         <TextView
             android:layout_width="wrap_content"
@@ -63,6 +70,7 @@
             android:layout_height="wrap_content"
             android:text="XXXX"
             android:textSize="18sp"
+            android:paddingHorizontal="5dp"
             ></TextView>
 
     </LinearLayout>
@@ -77,6 +85,7 @@
         ></TextView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_habilidades"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"

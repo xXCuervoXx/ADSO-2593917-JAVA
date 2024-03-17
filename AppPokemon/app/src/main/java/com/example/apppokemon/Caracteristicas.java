@@ -3,17 +3,17 @@ package com.example.apppokemon;
 public class Caracteristicas {
 
 
-    String [] listaImg;
+    String listaImg;
 
-    public Caracteristicas(String [] img) {
+    public Caracteristicas(String img) {
         this.listaImg = img;
     }
 
-    public String[] getListaImg() {
+    public String getListaImg() {
         return listaImg;
     }
 
-    public void setListaImg(String[] listaImg) {
+    public void setListaImg(String listaImg) {
         this.listaImg = listaImg;
     }
 }
